@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MGMG × IP 콜라보 후보 검토</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f14;
+    --surface: #161820;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8e9f0;
+    --text-muted: #7a7d8e;
+    --accent-gold: #f4c842;
+    --accent-teal: #4be3c8;
+    --accent-pink: #f06b8a;
+    --accent-blue: #5b9cf6;
+    --accent-purple: #b084f5;
+    --accent-orange: #f09060;
+    --tag-bg: rgba(255,255,255,0.06);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 0 0 80px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #1a1c2e 0%, #0e0f14 60%);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute;
+    top: -120px; right: -80px;
+    width: 420px; height: 420px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,200,66,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header::after {
+    content: ''; position: absolute;
+    bottom: -60px; left: 30%;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(75,227,200,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
+  .header-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent-teal);
+    margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+  }
+  .header-eyebrow::before {
+    content: ''; display: inline-block; width: 24px; height: 1px;
+    background: var(--accent-teal);
+  }
+  .header-title {
+    font-family: 'Noto Serif KR', serif; font-size: 38px; font-weight: 700;
+    line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.5px;
+  }
+  .header-title span { color: var(--accent-gold); }
+  .header-sub { font-size: 15px; color: var(--text-muted); max-width: 560px; line-height: 1.7; }
+  .header-meta { margin-top: 32px; display: flex; gap: 32px; flex-wrap: wrap; }
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .meta-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+  .meta-value { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  /* SECTION HEADER */
+  .section-header {
+    max-width: 1080px; margin: 56px auto 24px;
+    padding: 0 32px; display: flex; align-items: center; gap: 16px;
+  }
+  .section-badge {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; padding: 5px 12px;
+    border-radius: 4px; white-space: nowrap;
+  }
+  .badge-existing { background: rgba(244,200,66,0.12); color: var(--accent-gold); border: 1px solid rgba(244,200,66,0.25); }
+  .badge-new { background: rgba(75,227,200,0.1); color: var(--accent-teal); border: 1px solid rgba(75,227,200,0.22); }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+  .section-desc { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
+
+  /* GRID */
+  .grid {
+    max-width: 1080px; margin: 0 auto; padding: 0 32px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden; position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    display: flex; flex-direction: column;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.45); }
+  .card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; z-index: 3;
+  }
+  .card-1::before { background: linear-gradient(90deg,#f4c842,#f09060); }
+  .card-2::before { background: linear-gradient(90deg,#4be3c8,#5b9cf6); }
+  .card-3::before { background: linear-gradient(90deg,#f06b8a,#b084f5); }
+  .card-4::before { background: linear-gradient(90deg,#4be3c8,#b084f5); }
+  .card-5::before { background: linear-gradient(90deg,#f06b8a,#f09060); }
+  .card-6::before { background: linear-gradient(90deg,#b084f5,#5b9cf6); }
+  .card-1:hover { border-color: rgba(244,200,66,0.3); }
+  .card-2:hover { border-color: rgba(75,227,200,0.3); }
+  .card-3:hover { border-color: rgba(240,107,138,0.3); }
+  .card-4:hover { border-color: rgba(75,227,200,0.3); }
+  .card-5:hover { border-color: rgba(240,107,138,0.3); }
+  .card-6:hover { border-color: rgba(176,132,245,0.3); }
+
+  /* IMAGE */
+  .card-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    background: #12141f;
+    flex-shrink: 0;
+    cursor: zoom-in;
+  }
+  .card-image img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center top;
+    display: block; transition: transform 0.4s ease;
+  }
+  .card:hover .card-image img { transform: scale(1.04); }
+  .img-placeholder {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px;
+  }
+  .img-placeholder-icon { font-size: 32px; opacity: 0.18; }
+  .img-placeholder-text {
+    font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.18);
+  }
+  .img-credit {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    font-size: 9px; color: rgba(255,255,255,0.55);
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    padding: 20px 8px 6px; z-index: 2; pointer-events: none;
+  }
+  /* zoom hint overlay */
+  .card-image::after {
+    content: '🔍 클릭하면 원본 보기';
+    position: absolute; bottom: 24px; right: 10px;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.7);
+    background: rgba(0,0,0,0.55);
+    padding: 3px 7px; border-radius: 4px;
+    opacity: 0; transition: opacity 0.2s ease; z-index: 3;
+    pointer-events: none;
+  }
+  .card-image:hover::after { opacity: 1; }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+    cursor: zoom-out;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox-inner {
+    position: relative;
+    max-width: 92vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .lightbox-img {
+    max-width: 92vw;
+    max-height: 82vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+    display: block;
+  }
+  .lightbox-caption {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: -40px; right: -8px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+  /* CARD BODY */
+  .card-body { padding: 22px 24px 24px; display: flex; flex-direction: column; flex: 1; }
+  .card-number {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase;
+  }
+  .card-number.priority { color: var(--accent-teal); }
+  .card-title-ja { font-size: 15px; font-weight: 700; line-height: 1.4; margin-bottom: 3px; }
+  .card-title-ko { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+  .card-divider { height: 1px; background: var(--border); margin-bottom: 14px; }
+  .info-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+  .info-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--text-muted);
+    min-width: 54px; padding-top: 1px; flex-shrink: 0;
+  }
+  .info-value { font-size: 12px; color: var(--text); line-height: 1.5; }
+
+  .card-hook {
+    margin-top: 14px; padding: 12px 14px; border-radius: 10px;
+    background: rgba(255,255,255,0.035); border-left: 3px solid;
+    font-size: 12px; line-height: 1.75; color: var(--text); flex: 1;
+  }
+  .card-1 .card-hook { border-color: var(--accent-gold); }
+  .card-2 .card-hook { border-color: var(--accent-teal); }
+  .card-3 .card-hook { border-color: var(--accent-pink); }
+  .card-4 .card-hook { border-color: var(--accent-teal); }
+  .card-5 .card-hook { border-color: var(--accent-pink); }
+  .card-6 .card-hook { border-color: var(--accent-purple); }
+  .hook-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 5px; opacity: 0.6;
+  }
+
+  .tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag {
+    font-size: 10px; font-weight: 500; padding: 3px 8px;
+    border-radius: 20px; background: var(--tag-bg);
+    color: var(--text-muted); border: 1px solid var(--border);
+  }
+
+  .fit-bar { margin-top: 14px; display: flex; align-items: center; gap: 10px; }
+  .fit-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--text-muted); white-space: nowrap;
+  }
+  .fit-track { flex: 1; height: 4px; border-radius: 99px; background: rgba(255,255,255,0.07); overflow: hidden; }
+  .fit-fill { height: 100%; border-radius: 99px; }
+  .card-1 .fit-fill { background: linear-gradient(90deg,#f4c842,#f09060); }
+  .card-2 .fit-fill { background: linear-gradient(90deg,#4be3c8,#5b9cf6); }
+  .card-3 .fit-fill { background: linear-gradient(90deg,#f06b8a,#b084f5); }
+  .card-4 .fit-fill { background: linear-gradient(90deg,#4be3c8,#b084f5); }
+  .card-5 .fit-fill { background: linear-gradient(90deg,#f06b8a,#f09060); }
+  .card-6 .fit-fill { background: linear-gradient(90deg,#b084f5,#5b9cf6); }
+  .fit-score { font-size: 12px; font-weight: 700; white-space: nowrap; }
+  .card-1 .fit-score { color: var(--accent-gold); }
+  .card-2 .fit-score { color: var(--accent-teal); }
+  .card-3 .fit-score { color: var(--accent-pink); }
+  .card-4 .fit-score { color: var(--accent-teal); }
+  .card-5 .fit-score { color: var(--accent-pink); }
+  .card-6 .fit-score { color: var(--accent-purple); }
+
+  /* TABLE */
+  .table-section { max-width: 1080px; margin: 56px auto 0; padding: 0 32px; }
+  .table-title {
+    font-size: 13px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { border-bottom: 1px solid var(--border); }
+  th {
+    text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted);
+  }
+  td {
+    padding: 13px 14px; color: var(--text);
+    border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle;
+  }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .type-existing { color: var(--accent-gold); }
+  .type-new { color: var(--accent-teal); }
+
+  /* FOOTER */
+  .footer {
+    max-width: 1080px; margin: 48px auto 0; padding: 24px 32px 0;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-note { font-size: 12px; color: var(--text-muted); }
+  .footer-stamp {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--accent-gold); opacity: 0.6;
+  }
+
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .header { padding: 40px 24px 36px; }
+    .header-title { font-size: 28px; }
+    .section-header, .table-section, .grid { padding: 0 20px; }
+  }
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: 1fr; }
+    .header-meta { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">MGMG · 라인 매직머지</div>
+    <h1 class="header-title">IP 콜라보 후보<br><span>검토 자료</span></h1>
+    <p class="header-sub">2026년 7~9월 일본 시장을 겨냥한 IP 협업 후보 6건을 정리했습니다. 기성 IP 3건 + 2026년 하계 신규 방영·개봉 IP 3건으로 구성됩니다.</p>
+    <div class="header-meta">
+      <div class="meta-item"><span class="meta-label">콜라보 예정</span><span class="meta-value">2026년 7 – 9월</span></div>
+      <div class="meta-item"><span class="meta-label">게임 출시</span><span class="meta-value">2026년 5월 (일본)</span></div>
+      <div class="meta-item"><span class="meta-label">주요 타겟</span><span class="meta-value">3040 일본 여성 · 1020 가챠 팬</span></div>
+      <div class="meta-item"><span class="meta-label">후보 수</span><span class="meta-value">기성 3건 + 신규 3건</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 기성 IP -->
+<div class="section-header">
+  <span class="section-badge badge-existing">기성 IP · 극장판</span>
+  <div class="section-line"></div>
+  <span class="section-desc">두터운 팬덤 × 여름 흥행 기대작</span>
+</div>
+
+<div class="grid">
+
+  <!-- 치이카와 -->
+  <div class="card card-1">
+    <div class="card-image" onclick="openLightbox(this)">
+      <div class="img-placeholder">
+        <div class="img-placeholder-icon">🌊</div>
+        <div class="img-placeholder-text">Chiikawa Movie Visual</div>
+      </div>
+      <img src="https://img.youtube.com/vi/Gk1eOaPhRJo/hqdefault.jpg"
+           alt="映画ちいかわ 人魚の島のひみつ 特報映像"
+           onerror="this.style.opacity='0'">
+      <div class="img-credit">©ナガノ / 2026「映画ちいかわ」製作委員会</div>
+    </div>
+    <div class="card-body">
+      <div class="card-number">기성 IP · 01</div>
+      <div class="card-title-ja">映画ちいかわ 人魚の島のひみつ</div>
+      <div class="card-title-ko">치이카와: 인어 섬의 비밀</div>
+      <div class="card-divider"></div>
+      <div class="info-row"><span class="info-label">공개일</span><span class="info-value">2026년 7월 24일 (도호 배급)</span></div>
+      <div class="info-row"><span class="info-label">규모</span><span class="info-value">키캐릭터 대상 그랑프리 3회 · TV 애니 YouTube 4억 뷰</span></div>
+      <div class="info-row"><span class="info-label">타깃핏</span><span class="info-value">X(트위터) 기반 성장 — 3040 여성 팬덤 최강</span></div>
+      <div class="card-hook">
+        <div class="hook-label">콜라보 매력 포인트</div>
+        "작고 귀엽지만 시리어스한 순간도 있는" 이중 톤이 코니·브라운 세계관과 거의 동일하며, 7월 24일 개봉 흥행 열기와 콜라보 기간이 정확히 겹쳐 시너지 극대화 가능한 타이밍 최적 IP.
+      </div>
+      <div class="tags">
+        <span class="tag">귀여운 캐릭터</span><span class="tag">3040 여성 핵심</span>
+        <span class="tag">사회현상급</span><span class="tag">7월 개봉</span>
+      </div>
+      <div class="fit-bar">
+        <span class="fit-label">종합 적합도</span>
+        <div class="fit-track"><div class="fit-fill" style="width:98%"></div></div>
+        <span class="fit-score">S</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 케로로 -->
+  <div class="card card-2">
+    <div class="card-image" onclick="openLightbox(this)">
+      <div class="img-placeholder">
+        <div class="img-placeholder-icon">🐸</div>
+        <div class="img-placeholder-text">Keroro Movie Visual</div>
+      </div>
+      <img src="https://img.youtube.com/vi/DkTCXWSCGrI/hqdefault.jpg"
+           alt="新劇場版☆ケロロ軍曹 特報映像"
+           onerror="this.style.opacity='0'">
+      <div class="img-credit">©吉崎観音/KADOKAWA・劇場版ケロロ軍曹製作委員会</div>
+    </div>
+    <div class="card-body">
+      <div class="card-number">기성 IP · 02</div>
+      <div class="card-title-ja">新劇場版☆ケロロ軍曹<br>復活して速攻地球滅亡の危機！</div>
+      <div class="card-title-ko">신극장판 케로로 중사</div>
+      <div class="card-divider"></div>
+      <div class="info-row"><span class="info-label">공개일</span><span class="info-value">2026년 여름 (KADOKAWA · BN Pictures)</span></div>
+      <div class="info-row"><span class="info-label">규모</span><span class="info-value">누계 1,400만 부 · 16년 만의 극장판 복귀 · 20주년</span></div>
+      <div class="info-row"><span class="info-label">타깃핏</span><span class="info-value">현재 3040이 '어린 시절 함께한 IP' — 노스탤지어 강함</span></div>
+      <div class="card-hook">
+        <div class="hook-label">콜라보 매력 포인트</div>
+        3040 일본 여성이 초등학생 시절 열광했던 레트로 귀여움 IP로, 20주년 복귀 특유의 화제성과 엉뚱한 코미디 톤이 MGMG의 발랄한 분위기와 자연스럽게 맞닿는 노스탤지어 콜라보 후보.
+      </div>
+      <div class="tags">
+        <span class="tag">레트로 감성</span><span class="tag">3040 노스탤지어</span>
+        <span class="tag">코미디·엉뚱함</span><span class="tag">20주년 복귀</span>
+      </div>
+      <div class="fit-bar">
+        <span class="fit-label">종합 적합도</span>
+        <div class="fit-track"><div class="fit-fill" style="width:80%"></div></div>
+        <span class="fit-score">A</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 짱구 -->
+  <div class="card card-3">
+    <div class="card-image" onclick="openLightbox(this)">
+      <div class="img-placeholder">
+        <div class="img-placeholder-icon">👺</div>
+        <div class="img-placeholder-text">Shinchan Movie Visual</div>
+      </div>
+      <img src="https://img.youtube.com/vi/BDxZhjtVWyc/hqdefault.jpg"
+           alt="映画クレヨンしんちゃん 奇々怪々 予告映像"
+           onerror="this.style.opacity='0'">
+      <div class="img-credit">©臼井儀人/双葉社・シンエイ・テレビ朝日・ADK 2026</div>
+    </div>
+    <div class="card-body">
+      <div class="card-number">기성 IP · 03</div>
+      <div class="card-title-ja">映画クレヨンしんちゃん<br>奇々怪々！オラの妖怪バケ～ション</div>
+      <div class="card-title-ko">극장판 짱구는 못말려: 요괴 바캉스</div>
+      <div class="card-divider"></div>
+      <div class="info-row"><span class="info-label">공개일</span><span class="info-value">2026년 7월 31일</span></div>
+      <div class="info-row"><span class="info-label">규모</span><span class="info-value">매년 여름 박스오피스 상위권 · 국민 캐릭터급</span></div>
+      <div class="info-row"><span class="info-label">타깃핏</span><span class="info-value">전 연령 대응 — 3040 포함 가족 단위 광범위 팬층</span></div>
+      <div class="card-hook">
+        <div class="hook-label">콜라보 매력 포인트</div>
+        일본 최고 수준의 인지도를 가진 국민 캐릭터로 연령 불문 거부감이 없지만, 라이선스 난이도가 높고 경쟁 콜라보가 많아 차별화 기획이 전제되어야 하는 안전형 후보.
+      </div>
+      <div class="tags">
+        <span class="tag">국민 캐릭터</span><span class="tag">전 연령 인지도</span>
+        <span class="tag">7월 개봉</span><span class="tag">라이선스 난도 높음</span>
+      </div>
+      <div class="fit-bar">
+        <span class="fit-label">종합 적합도</span>
+        <div class="fit-track"><div class="fit-fill" style="width:68%"></div></div>
+        <span class="fit-score">B+</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- 신규 IP -->
+<div class="section-header">
+  <span class="section-badge badge-new">신규 IP · 2026 하계 방영</span>
+  <div class="section-line"></div>
+  <span class="section-desc">타깃 적합성 · 예상 인지도 기준 재정렬</span>
+</div>
+
+<div class="grid">
+
+  <!-- 천막의 자두가르 (1순위) -->
+  <div class="card card-4">
+    <div class="card-image" onclick="openLightbox(this)">
+      <div class="img-placeholder">
+        <div class="img-placeholder-icon">🔮</div>
+        <div class="img-placeholder-text">Jaadugar Teaser Visual</div>
+      </div>
+      <img src="https://img.youtube.com/vi/mqB39GOkuSI/hqdefault.jpg"
+           alt="天幕のジャードゥーガル ティザーPV"
+           onerror="this.style.opacity='0'">
+      <div class="img-credit">©トマトスープ（秋田書店）／天幕のジャードゥーガル製作委員会</div>
+    </div>
+    <div class="card-body">
+      <div class="card-number priority">신규 IP · 01 ★ 최우선</div>
+      <div class="card-title-ja">天幕のジャードゥーガル<br>(A Witch in Mongolia)</div>
+      <div class="card-title-ko">천막의 자두가르 (몽골의 마녀)</div>
+      <div class="card-divider"></div>
+      <div class="info-row"><span class="info-label">방영</span><span class="info-value">2026년 7월~ (테레아사계 · 사이언스 SARU 제작)</span></div>
+      <div class="info-row"><span class="info-label">규모</span><span class="info-value">이 만화가 대단해! 2023 여성편 1위 · 만화대상 2년 연속 랭크인</span></div>
+      <div class="info-row"><span class="info-label">타깃핏</span><span class="info-value">20~40대 여성 팬층과 MGMG 핵심 타깃 정확히 일치</span></div>
+      <div class="card-hook">
+        <div class="hook-label">콜라보 매력 포인트</div>
+        제목 자체가 '마녀'를 의미하는 강한 여성 서사 IP로, 비평 권위와 해외 인지도까지 갖추며 신규 IP 중 타깃 유저 일치도가 가장 높은 압도적 1순위 후보.
+      </div>
+      <div class="tags">
+        <span class="tag">마녀 서사</span><span class="tag">3040 여성 정합</span>
+        <span class="tag">비평 인지도 최고</span><span class="tag">글로벌 확장성</span>
+      </div>
+      <div class="fit-bar">
+        <span class="fit-label">종합 적합도</span>
+        <div class="fit-track"><div class="fit-fill" style="width:86%"></div></div>
+        <span class="fit-score">A+</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 빡친 영애 (2순위) -->
+  <div class="card card-5">
+    <div class="card-image" onclick="openLightbox(this)">
+      <div class="img-placeholder">
+        <div class="img-placeholder-icon">⚡</div>
+        <div class="img-placeholder-text">Buchigire Teaser Visual</div>
+      </div>
+      <img src="https://buchigire-anime.com/wp/wp-content/themes/buchigire-wp-theme/_assets/images/top/fv/vis_000.png"
+           alt="ブチ切れ令嬢は報復を誓いました ティザービジュアル"
+           onerror="this.style.opacity='0'">
+      <div class="img-credit">©はぐれメタボ・おおのいも・昌未 / ホビージャパン・ブチ切れ令嬢製作委員会</div>
+    </div>
+    <div class="card-body">
+      <div class="card-number">신규 IP · 02</div>
+      <div class="card-title-ja">ブチ切れ令嬢は報復を誓いました。<br>〜魔導書の力で祖国を叩き潰します〜</div>
+      <div class="card-title-ko">빡친 영애는 복수를 맹세했습니다</div>
+      <div class="card-divider"></div>
+      <div class="info-row"><span class="info-label">방영</span><span class="info-value">2026년 7월~ (TV 애니메이션, 신작)</span></div>
+      <div class="info-row"><span class="info-label">규모</span><span class="info-value">원작 소설 7권 · 니코니코 만화 누계 290만 재생</span></div>
+      <div class="info-row"><span class="info-label">타깃핏</span><span class="info-value">20~30대 여성 "통쾌한 역전" 서사 팬덤 — 여성 타깃 정합</span></div>
+      <div class="card-hook">
+        <div class="hook-label">콜라보 매력 포인트</div>
+        마도서(魔導書)를 핵심 무기로 사용하는 강한 여성 주인공 서사로, MGMG의 마법 카드 BM과 직접 연결 가능하며 여성 팬덤의 게임 유입이 기대되는 마법 × 여성 조합 후보.
+      </div>
+      <div class="tags">
+        <span class="tag">여성 타깃</span><span class="tag">마도서 × 마법카드</span>
+        <span class="tag">7월 방영</span><span class="tag">역전 서사</span>
+      </div>
+      <div class="fit-bar">
+        <span class="fit-label">종합 적합도</span>
+        <div class="fit-track"><div class="fit-fill" style="width:74%"></div></div>
+        <span class="fit-score">A</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 낙제 현자 (3순위) -->
+  <div class="card card-6">
+    <div class="card-image" onclick="openLightbox(this)">
+      <div class="img-placeholder">
+        <div class="img-placeholder-icon">🏫</div>
+        <div class="img-placeholder-text">Rakudai Kenja Visual</div>
+      </div>
+      <img src="https://rakudai-anime.com/core_sys/images/main/home/kv.jpg"
+           alt="落第賢者の学院無双 キービジュアル"
+           onerror="this.style.opacity='0'">
+      <div class="img-credit">©白石新・けんたろう・魚デニム/SQUARE ENIX・落第賢者の学院無双製作委員会</div>
+    </div>
+    <div class="card-body">
+      <div class="card-number">신규 IP · 03</div>
+      <div class="card-title-ja">落第賢者の学院無双<br>〜二度目の転生、Sランクチート魔術師〜</div>
+      <div class="card-title-ko">낙제 현자의 학원 무쌍</div>
+      <div class="card-divider"></div>
+      <div class="info-row"><span class="info-label">방영</span><span class="info-value">2026년 7월~ (TV 애니메이션, 신작)</span></div>
+      <div class="info-row"><span class="info-label">규모</span><span class="info-value">시리즈 누계 180만 부 · 마법학원 배경</span></div>
+      <div class="info-row"><span class="info-label">타깃핏</span><span class="info-value">이세계·전생 팬층 주도 (남성 코어) — MGMG 타깃과 불일치</span></div>
+      <div class="card-hook">
+        <div class="hook-label">콜라보 매력 포인트</div>
+        마법학원이 배경 그 자체라 게임 세계관 연계는 가장 자연스럽지만, 핵심 팬층이 남성 이세계물 독자 중심으로 MGMG 주요 타깃과 핏이 낮음. 신규 IP라 협의 비용 면에서 유리한 참고 후보.
+      </div>
+      <div class="tags">
+        <span class="tag">마법학원 직결</span><span class="tag">세계관 연계 최고</span>
+        <span class="tag">협의 비용 유리</span><span class="tag">타깃 핏 보완 필요</span>
+      </div>
+      <div class="fit-bar">
+        <span class="fit-label">종합 적합도</span>
+        <div class="fit-track"><div class="fit-fill" style="width:58%"></div></div>
+        <span class="fit-score">B+</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- 요약 테이블 -->
+<div class="table-section">
+  <div class="table-title">한눈에 비교</div>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>IP명</th>
+        <th>공개/방영</th>
+        <th>3040여성 타깃핏</th>
+        <th>마법 연계</th>
+        <th>적합도</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="type-existing">● 기성</span></td>
+        <td>치이카와: 인어 섬의 비밀</td>
+        <td>2026.07.24 개봉</td>
+        <td>⭐⭐⭐⭐⭐</td>
+        <td>△ 귀여운 세계관</td>
+        <td><strong>S</strong></td>
+      </tr>
+      <tr>
+        <td><span class="type-existing">● 기성</span></td>
+        <td>신극장판 케로로 중사</td>
+        <td>2026년 여름</td>
+        <td>⭐⭐⭐⭐</td>
+        <td>△ SF·코미디</td>
+        <td><strong>A</strong></td>
+      </tr>
+      <tr>
+        <td><span class="type-existing">● 기성</span></td>
+        <td>극장판 짱구는 못말려</td>
+        <td>2026.07.31 개봉</td>
+        <td>⭐⭐⭐</td>
+        <td>△ 패밀리·요괴</td>
+        <td><strong>B+</strong></td>
+      </tr>
+      <tr>
+        <td><span class="type-new">● 신규</span></td>
+        <td>천막의 자두가르 ★</td>
+        <td>2026.07 방영</td>
+        <td>⭐⭐⭐⭐⭐</td>
+        <td>⭐⭐⭐ 마녀 서사</td>
+        <td><strong>A+</strong></td>
+      </tr>
+      <tr>
+        <td><span class="type-new">● 신규</span></td>
+        <td>빡친 영애는 복수를 맹세했습니다</td>
+        <td>2026.07 방영</td>
+        <td>⭐⭐⭐⭐</td>
+        <td>⭐⭐⭐⭐ 마도서</td>
+        <td><strong>A</strong></td>
+      </tr>
+      <tr>
+        <td><span class="type-new">● 신규</span></td>
+        <td>낙제 현자의 학원 무쌍</td>
+        <td>2026.07 방영</td>
+        <td>⭐⭐</td>
+        <td>⭐⭐⭐⭐⭐ 마법학원</td>
+        <td><strong>B+</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  <p class="footer-note">본 자료는 MGMG(라인 매직머지) IP 콜라보 후보 내부 검토용입니다. 일정 및 정보는 변경될 수 있습니다.</p>
+  <span class="footer-stamp">MGMG · 2026 IP Collab Review</span>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<script>
+  function openLightbox(container) {
+    const img = container.querySelector('img');
+    const credit = container.querySelector('.img-credit');
+    if (!img || img.style.opacity === '0') return;
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbCap = document.getElementById('lightbox-caption');
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    lbCap.textContent = credit ? credit.textContent : '';
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e) {
+    if (e && e.target !== e.currentTarget && !e.target.classList.contains('lightbox-close')) return;
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+</body>
+</html>
